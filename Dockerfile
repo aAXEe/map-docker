@@ -28,6 +28,7 @@ RUN \
         php-pear \
         unzip \
         git \
+        apache2-utils \
         php-apc ;\
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -40,8 +41,8 @@ RUN \
 ADD service-php5-fpm.sh /etc/service/php5-fpm/run
 RUN chmod +x /etc/service/php5-fpm/run
 
+RUN echo test
 ADD nginx-site.conf /etc/nginx/sites-available/default
-
 
 # create data dir
 RUN \
