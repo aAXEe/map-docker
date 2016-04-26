@@ -1,0 +1,22 @@
+[Unit]
+Description=MapOfOpenSeaMap-V2
+After=docker.service
+Requires=docker.service
+Wants=reverse-proxy.service
+
+[Service]
+Restart=always
+KillMode=control-group
+ExecStartPre=-/usr/bin/docker rm map2-web
+ExecStart=/usr/bin/docker run --name=map2-web --detach=false --cpu-shares=512 \
+    --memory=128M --publish=127.0.0.1::80 --rm=true \
+    --env=VIRTUAL_HOST=alpha.*,alpha.openseamap.org \
+    --env=LETSENCRYPT_HOST=alpha.openseamap.org --env=LETSENCRYPT_EMAIL=axel@brasshack.de \
+    --env=GIT_REPO=https://github.com/aAXEe/online_chart_ol3 --env=GIT_BRANCH=gh-pages \
+    --hostname=map2-web \
+    --cap-drop=NET_RAW  \
+    openseamap/map-docker:master
+ExecReload=/usr/bin/docker pull openseamap/map-docker:master
+
+[Install]
+WantedBy=multi-user.target
