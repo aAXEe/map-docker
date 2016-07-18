@@ -10,7 +10,8 @@ KillMode=control-group
 ExecStartPre=-/usr/bin/docker rm map-web
 ExecStart=/usr/bin/docker run --name=map-web --detach=false --cpu-shares=512 \
     --memory=128M --publish=127.0.0.1::80 --rm=true \
-    --env=VIRTUAL_HOST=map.* \
+    --env=VIRTUAL_HOST=map.*,map.openseamap.org \
+    --env=LETSENCRYPT_HOST=map.openseamap.org --env=LETSENCRYPT_EMAIL=project@openseamap.org \
     --env=GIT_REPO=https://github.com/OpenSeaMap/online_chart.git \
     --hostname=map-web \
     --cap-drop=NET_RAW  \
