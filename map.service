@@ -15,6 +15,7 @@ ExecStart=/usr/bin/docker run --name=map-web --detach=false --cpu-shares=512 \
     --env=GIT_REPO=https://github.com/OpenSeaMap/online_chart.git \
     --hostname=map-web \
     --cap-drop=NET_RAW  \
+    --volume /var/lib/online-chart:/var/lib/online-chart \
     openseamap/map-docker:master
 ExecReload=/usr/bin/docker pull openseamap/map-docker:master
 
