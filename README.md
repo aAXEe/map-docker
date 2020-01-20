@@ -13,6 +13,13 @@ It is prepared to use [raumzeitlabor/nginx-proxy](https://github.com/raumzeitlab
 
 # Setup
 
+## config files
+copy config file to docker host:
+```
+mkdir -p /var/lib/online-chart/
+cp online_chart.ini /var/lib/online-chart/online_chart.ini
+```
+
 ## Development
 
 a) You can use `docker-compose` for the container startup and link the `/data` volume
